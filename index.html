@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ryopc Global Digital Support</title>
+    <style>
+        :root {
+            --primary: #0052cc;      /* 進化したテック・ブルー */
+            --dark: #0a192f;         /* サイバー・ダークネイビー */
+            --accent: #00bfff;       /* サイバー・アクアブルー */
+            --bg: #f8fafc;           /* クリーンな背景グレー */
+            --text: #334155;
+        }
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #172a45 100%);
+            color: white;
+            padding: 6rem 1rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 4px solid var(--accent);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #ffffff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        header p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0 auto;
+            color: #94a3b8;
+        }
+        .container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2.5rem;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+        h2 {
+            color: var(--dark);
+            font-size: 1.8rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        h2::before {
+            content: "⚡";
+            color: var(--accent);
+        }
+        p {
+            font-size: 1.1rem;
+            color: #475569;
+        }
+        footer {
+            background-color: var(--dark);
+            color: #94a3b8;
+            padding: 3rem 1rem;
+            text-align: center;
+            font-size: 0.95rem;
+            border-top: 1px solid #1e293b;
+        }
+        footer p {
+            color: #64748b;
+            margin: 0.5rem 0;
+        }
+        .status-badge {
+            display: inline-block;
+            background-color: #1e293b;
+            color: var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ryopc org</h1>
+        <p>Ensuring everyone, everywhere, has access to legitimate support for digital devices.</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Our Mission (使命)</h2>
+            <p>Led by ryopcCEO, <strong>ryopc</strong> is a digital-first global initiative. We believe that access to technology is a fundamental right, and fair, transparent support is essential to maintain it. We protect users from fraudulent support practices worldwide.</p>
+        </div>
+
+        <div class="card">
+            <h2>Our Services (今後の展開)</h2>
+            <p>We provide a multi-layered ecosystem including legitimate device guidance and digital literacy advocacy. We plan to sequentially launch diverse digital solutions to meet the evolving needs of the global community.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 ryopc Global Initiative. All Rights Reserved.</p>
+        <div class="status-badge">Status: Under application for Open Source Collective (Covina, CA, USA)</div>
+    </footer>
+<script>
+  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+
+  ChannelIO('boot', {
+    "pluginKey": "f06bb3b5-5394-4b24-b902-03d4110cfddd"
+  });
+</script>
+</body>
+</html>
