@@ -143,59 +143,61 @@
 
     <!-- 🧠 チャネルトークの動的制御スクリプト -->
     <script>
-        // ⚠️ チャネルトーク公式の埋め込み関数
-        function loadChannelTalk() {
-            (function() {
-                var w = window;
-                if (w.ChannelIO) { return (w.console.error || w.console.log || function(){})('ChannelIO script included twice.'); }
-                var ch = function() { ch.c(arguments); };
-                ch.q = []; ch.c = function(args) { ch.q.push(args); };
-                w.ChannelIO = ch;
-                function l() {
-                    if (w.ChannelIOInitialized) { return; }
-                    w.ChannelIOInitialized = true;
-                    var s = document.createElement('script');
-                    s.type = 'text/javascript'; s.async = true;
-                    s.src = 'channel.io';
-                    s.charset = 'UTF-8';
-                    var x = document.getElementsByTagName('script')[0];
-                    x.parentNode.insertBefore(s, x);
-                }
-                if (document.readyState === 'complete') { l(); } 
-                else { w.addEventListener('DOMContentLoaded', l); w.addEventListener('load', l); }
-            })();
-
-            // ⚠️ ここにあなたのチャネルトークの「本物のpluginKey」を貼り付けてください！
-            ChannelIO('boot', {
-                "pluginKey": "f06bb3b5-5394-4b24-b902-03d4110cfddd" 
-            });
+        // 1. チャネルトークの起動・リブートを完全制御する関数
+function bootChannelTalk() {
+    (function() {
+        var w = window;
+        if (w.ChannelIO) { 
+            // 💡 既にスクリプトが存在する場合は、二重読み込みを防ぎつつ即座にbootをかける
+            w.ChannelIO('boot', { "pluginKey": "f06bb3b5-5394-4b24-b902-03d4110cfddd" });
+            w.ChannelIO('showMessenger'); // 👈 同意した瞬間にチャット窓を強制的に目の前に出現させるガチ演出
+            return;
         }
-
-        // 🤖 クッキー自動感知ロジック
-        window.onload = function() {
-            var consent = localStorage.getItem('ryopc_cookie_consent');
-            if (consent === 'granted') {
-                // すでに同意済みの場合はチャネルトークを即時起動
-                loadChannelTalk();
-            } else if (consent === 'denied') {
-                // 拒否済みの場合は何もしない（起動させない）
-            } else {
-                // 初めて来たユーザーにはバナーをポーンと表示
-                document.getElementById('cookie-banner').style.display = 'block';
-            }
+        var ch = function() { ch.c(arguments); };
+        ch.q = []; ch.c = function(args) { ch.q.push(args); };
+        w.ChannelIO = ch;
+        function l() {
+            if (w.ChannelIOInitialized) { return; }
+            w.ChannelIOInitialized = true;
+            var s = document.createElement('script');
+            s.type = 'text/javascript'; s.async = true;
+            s.src = 'channel.io'; // 👈 確実につなぐための公式CDN正規URL
+            s.charset = 'UTF-8';
+            var x = document.getElementsByTagName('script')[0] || document.body;
+            x.parentNode.insertBefore(s, x);
+        }
+        // スクリプトの読み込みが完了した瞬間に boot を実行する
+        s.onload = function() {
+            window.ChannelIO('boot', { "pluginKey": "あなたのプラグインキー" });
+            window.ChannelIO('showMessenger');
         };
+        l();
+    })();
+}
 
-        function acceptCookies() {
-            localStorage.setItem('ryopc_cookie_consent', 'granted');
-            document.getElementById('cookie-banner').style.display = 'none';
-            loadChannelTalk(); // その場でチャネルトークを起動！
-        }
+// 2. クッキー（ローカルストレージ）の状態を自動感知するロジック
+window.addEventListener('load', function() { // 💡 DOMContentLoadedから「load」に変更してバグを回避
+    var consent = localStorage.getItem('ryopc_cookie_consent');
+    if (consent === 'granted') {
+        bootChannelTalk(); // 同意済みなら即時チャネルトークを起動
+    } else if (!consent) {
+        document.getElementById('cookie-banner').style.display = 'block'; // 未同意ならバナーを表示
+    }
+});
 
-        function declineCookies() {
-            localStorage.setItem('ryopc_cookie_consent', 'denied');
-            document.getElementById('cookie-banner').style.display = 'none';
-            // チャネルトークは起動しない
-        }
+// 3. 同意ボタン（Accept）を押した時の処理
+function acceptCookies() {
+    localStorage.setItem('ryopc_cookie_consent', 'granted');
+    document.getElementById('cookie-banner').style.display = 'none';
+    bootChannelTalk(); // その場でチャネルトークを完全強制起動！
+}
+
+// 4. 拒否ボタン（Decline）を押した時の処理
+function declineCookies() {
+    localStorage.setItem('ryopc_cookie_consent', 'denied');
+    document.getElementById('cookie-banner').style.display = 'none';
+}
+
     </script>
 
 </body>
